@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: config-server
+  security:
+    user:
+      name: ${app.config.username}
+      password: ${app.config.password}
+  cloud:
+    discovery:
+      enabled: true
+    config:
+      server:
+        git:
+          default-label: master
+          uri: https://github.com/carlosggz/config-server-demo
+          searchPaths: .,{application}
+          clone-on-start: true
+
+eureka:
+  client:
+    enabled: true
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: ${app.eureka.url}
+
+server:
+  port: ${app.port:8080}
+
+#Encryption properties
+encrypt:
+  key: ${app.config.key}
+  salt: ${app.config.salt}
