@@ -1,14 +1,24 @@
-plugins {
-    id 'java'
-}
+subprojects {
+    apply plugin: 'java'
 
-group = 'org.example'
-version = '3.0.0-SNAPSHOT'
+    group = 'org.example'
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
+    ext {
+        springCloudVersion = "2025.1.3"
+    }
 
-dependencies {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(25)
+        }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
 }

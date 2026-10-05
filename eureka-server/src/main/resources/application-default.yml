@@ -1,0 +1,6 @@
+app:
+  port: 8761
+  eureka:
+    url: http://uid:pwd@localhost:8761/eureka
+    username: uid
+    password: pwd
