@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:13.7
+    container_name: demo-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${MY_USER}
+      POSTGRES_PASSWORD: ${MY_PASSWORD}
+      POSTGRES_DB: movies
+    networks:
+      - my-network
+  rabbitmq:
+    image: rabbitmq:3.8.5-management-alpine
+    container_name: demo-rabbitmq
+    restart: unless-stopped
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: ${MY_USER}
+      RABBITMQ_DEFAULT_PASS: ${MY_PASSWORD}
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

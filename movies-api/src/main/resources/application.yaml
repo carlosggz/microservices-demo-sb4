@@ -1,0 +1,76 @@
+spring:
+  application:
+    name: movies-api
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${app.db.host}:${app.db.port}/${app.db.database}
+    username: ${app.db.username}
+    password: ${app.db.password}
+    hikari:
+      maximum-pool-size: 20
+      connection-timeout: 30000
+      idle-timeout: 600000
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: ${app.db.schema}
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0
+    locations: classpath:db/migration
+    sql-migration-prefix: V
+    table: schema_version
+    schemas: ${app.db.schema}
+    init-sqls: CREATE SCHEMA IF NOT EXISTS ${app.db.schema};
+    fail-on-missing-locations: true
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+  rabbitmq:
+    username: ${app.rabbitmq.username}
+    password: ${app.rabbitmq.password}
+    host: ${app.rabbitmq.host}
+    port: ${app.rabbitmq.port}
+    virtual-host: ${app.rabbitmq.virtual-host}
+  cloud:
+    config:
+      enabled: false # TODO: enable config server
+      fail-fast: true
+    discovery:
+      enabled: true
+    stream:
+      default-binder: rabbit
+      bindings:
+        movie-out-0:
+          destination: movies-topic
+          content-type: application/json
+      rabbit:
+        bindings:
+          movie-out-0:
+            producer:
+              routing-key-expression: headers.myRoutingKey
+
+
+eureka:
+  client:
+    enabled: false # TODO enable eureka client
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: ${app.eureka.url}
+
+server:
+  port: ${app.port:8080}
+
+springdoc:
+  swagger-ui:
+    enabled: ${app.swagger.enabled}
+    path: /swagger-ui
+  api-docs:
+    enabled: ${app.swagger.enabled}
+    path: /api-docs
