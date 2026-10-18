@@ -23,6 +23,16 @@ services:
       RABBITMQ_DEFAULT_PASS: ${MY_PASSWORD}
     networks:
       - my-network
+  mongo:
+    image: mongo:9.0
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MY_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MY_PASSWORD}
+    ports:
+      - "27017:27017"
+    networks:
+      - my-network
 
 networks:
   my-network:

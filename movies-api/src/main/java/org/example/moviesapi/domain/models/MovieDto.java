@@ -15,11 +15,11 @@ public record MovieDto(
         int likes
 ){
     public MovieDto {
-        Assert.isTrue(StringUtils.isNotBlank(id), "Id cannot be null");
-        Assert.isTrue(StringUtils.isNotBlank(title), "Title cannot be null");
+        Assert.isTrue(StringUtils.isNotBlank(id), "Id cannot be empty");
+        Assert.isTrue(StringUtils.isNotBlank(title), "Title cannot be empty");
         Assert.isTrue(releaseYear >= 1960 && releaseYear <= LocalDate.now().getYear(),
                 "Year must be between 1960 and current year");
-        Assert.isTrue(StringUtils.isNotBlank(imdb), "Imdb cannot be null");
+        Assert.isTrue(StringUtils.isNotBlank(imdb), "Imdb cannot be empty");
         Assert.isTrue(likes >= 0, "Likes cannot be negative");
     }
 }

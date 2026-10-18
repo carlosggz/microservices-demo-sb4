@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title} ?: 'Actors API - Home'">Actors API - Home</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1 th:text="${welcomeMessage} ?: 'Welcome to Actors API'">Welcome to Movies API</h1>
+        <p th:text="${description} ?: 'Documentation and resources for the API available:'" th:if="${swaggerEnabled}">Documentation and resources for the API available:</p>
+        <div th:if="${swaggerEnabled}">
+            <a th:href="${swaggerUiPath}" th:text="'Swagger UI'">Swagger UI</a>
+            <a th:href="${apiDocsPath}" th:text="'OpenAPI Docs'" style="margin-left: 20px;">OpenAPI Docs</a>
+        </div>
+    </div>
+</body>
+</html>

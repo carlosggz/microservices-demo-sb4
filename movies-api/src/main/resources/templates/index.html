@@ -7,7 +7,7 @@
 <body>
     <div style="text-align: center;">
         <h1 th:text="${welcomeMessage} ?: 'Welcome to Movies API'">Welcome to Movies API</h1>
-        <p th:text="${description} ?: 'Documentation and resources for the API available:'" th:visible="${swaggerEnabled}">Documentation and resources for the API available:</p>
+        <p th:text="${description} ?: 'Documentation and resources for the API available:'" th:if="${swaggerEnabled}">Documentation and resources for the API available:</p>
         <div th:if="${swaggerEnabled}">
             <a th:href="${swaggerUiPath}" th:text="'Swagger UI'">Swagger UI</a>
             <a th:href="${apiDocsPath}" th:text="'OpenAPI Docs'" style="margin-left: 20px;">OpenAPI Docs</a>

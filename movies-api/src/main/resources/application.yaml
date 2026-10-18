@@ -39,7 +39,7 @@ spring:
     virtual-host: ${app.rabbitmq.virtual-host}
   cloud:
     config:
-      enabled: false # TODO: enable config server
+      enabled: true
       fail-fast: true
     discovery:
       enabled: true
@@ -58,7 +58,7 @@ spring:
 
 eureka:
   client:
-    enabled: false # TODO enable eureka client
+    enabled: true
     registerWithEureka: true
     fetchRegistry: true
     service-url:

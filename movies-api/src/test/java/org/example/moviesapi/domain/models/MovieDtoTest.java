@@ -75,7 +75,7 @@ class MovieDtoTest {
                 new MovieDto(invalidId, VALID_TITLE, VALID_RELEASE_YEAR, VALID_IMDB, VALID_LIKES)
         );
 
-        assertEquals("Id cannot be null", exception.getMessage());
+        assertEquals("Id cannot be empty", exception.getMessage());
     }
 
     @ParameterizedTest(name = "title: \"{0}\"")
@@ -87,7 +87,7 @@ class MovieDtoTest {
                 new MovieDto(VALID_ID, invalidTitle, VALID_RELEASE_YEAR, VALID_IMDB, VALID_LIKES)
         );
 
-        assertEquals("Title cannot be null", exception.getMessage());
+        assertEquals("Title cannot be empty", exception.getMessage());
     }
 
     @ParameterizedTest(name = "releaseYear: {0}")
@@ -132,7 +132,7 @@ class MovieDtoTest {
                 new MovieDto(VALID_ID, VALID_TITLE, VALID_RELEASE_YEAR, invalidImdb, VALID_LIKES)
         );
 
-        assertEquals("Imdb cannot be null", exception.getMessage());
+        assertEquals("Imdb cannot be empty", exception.getMessage());
     }
 
     @ParameterizedTest(name = "likes: {0}")

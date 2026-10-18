@@ -1,0 +1,28 @@
+app:
+  eureka:
+    url: http://uid:pwd@localhost:2222/eureka
+  port: 8085
+  rabbitmq:
+    username: xx
+    password: xx
+    host: localhost
+    port: 4444
+    virtual-host: /
+  swagger:
+    enabled: false
+
+spring:
+  config:
+    import: optional:configserver:http://ConfigUser:ConfigPassword@localhost:5555
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  client:
+    enabled: false
+
+de.flapdoodle.mongodb.embedded.version: 7.0.2
+
+mongock:
+  enabled: false

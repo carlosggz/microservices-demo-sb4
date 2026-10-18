@@ -1,0 +1,40 @@
+app:
+  eureka:
+    url: http://uid:pwd@localhost:8761/eureka
+  port: 8085
+  mongo:
+    host: localhost
+    port: 27017
+    database: actors
+    username: uid
+    password: pwd
+    authentication-database: admin
+    transaction-enabled: false
+    uri-suffix: ?retryWrites=false&authSource=admin
+  rabbitmq:
+    username: uid
+    password: pwd
+    host: localhost
+    port: 5672
+    virtual-host: /
+  swagger:
+    enabled: true
+
+spring:
+  config:
+    import: optional:configserver:http://ConfigUser:ConfigPassword@localhost:8888
+  cloud:
+    config:
+      enabled: false
+  mongodb:
+    host: ${app.mongo.host}
+    port: ${app.mongo.port}
+    database: ${app.mongo.database}
+    username: ${app.mongo.username}
+    password: ${app.mongo.password}
+    authentication-database: ${app.mongo.authentication-database}
+    uri: mongodb://${app.mongo.username}:${app.mongo.password}@${app.mongo.host}:${app.mongo.port}/${app.mongo.database}${app.mongo.uri-suffix}
+
+eureka:
+  client:
+    enabled: false

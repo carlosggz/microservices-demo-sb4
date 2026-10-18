@@ -3,10 +3,6 @@ subprojects {
 
     group = 'org.example'
 
-    ext {
-        springCloudVersion = "2025.1.3"
-    }
-
     repositories {
         mavenLocal()
         mavenCentral()

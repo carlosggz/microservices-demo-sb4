@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: actors-api
+  cloud:
+    config:
+      enabled: true
+      fail-fast: true
+    discovery:
+      enabled: true
+    function:
+      definition: likesConsumer
+    stream:
+      default-binder: rabbit
+      bindings:
+        likesConsumer-in-0:
+          destination: movies-topic
+          group: ${spring.application.name}
+      rabbit:
+        bindings:
+          likesConsumer-in-0:
+            consumer:
+              binding-routing-key: 'movie.like'
+  rabbitmq:
+    username: ${app.rabbitmq.username}
+    password: ${app.rabbitmq.password}
+    host: ${app.rabbitmq.host}
+    port: ${app.rabbitmq.port}
+    virtual-host: ${app.rabbitmq.virtual-host}
+
+
+eureka:
+  client:
+    enabled: true
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: ${app.eureka.url}
+
+server:
+  port: ${app.port:8080}
+
+#Mongo migrations
+mongock:
+  enabled: true
+  migration-scan-package: org.example.actorsapi.infrastructure.persistence.migrations
+
+#OpenAPI
+springdoc:
+  swagger-ui:
+    enabled: ${app.swagger.enabled}
+    path: /swagger-ui
+  api-docs:
+    enabled: ${app.swagger.enabled}
+    path: /api-docs
