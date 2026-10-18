@@ -5,16 +5,34 @@ spring:
     user:
       name: ${app.config.username}
       password: ${app.config.password}
+  profiles:
+    active: jdbc
+    include: default
   cloud:
     discovery:
       enabled: true
     config:
       server:
-        git:
-          default-label: master
-          uri: https://github.com/carlosggz/config-server-demo
-          searchPaths: .,{application}
-          clone-on-start: true
+        jdbc:
+          sql: SELECT "key", "value" from ${app.postgres.schema}.properties where application=? and profile=? and label=?
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${app.postgres.host}:${app.postgres.port}/${app.postgres.database}?currentSchema=${app.postgres.schema}
+    username: ${app.postgres.username}
+    password: ${app.postgres.password}
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0
+    locations: classpath:db/migration
+    sql-migration-prefix: V
+    table: schema_version
+    schemas: ${app.postgres.schema}
+    init-sqls: CREATE SCHEMA IF NOT EXISTS ${app.postgres.schema};
+    fail-on-missing-locations: true
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
 
 eureka:
   client:

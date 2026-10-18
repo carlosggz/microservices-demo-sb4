@@ -3,9 +3,9 @@ spring:
     name: movies-api
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${app.db.host}:${app.db.port}/${app.db.database}
-    username: ${app.db.username}
-    password: ${app.db.password}
+    url: jdbc:postgresql://${app.postgres.host}:${app.postgres.port}/${app.postgres.database}
+    username: ${app.postgres.username}
+    password: ${app.postgres.password}
     hikari:
       maximum-pool-size: 20
       connection-timeout: 30000
@@ -14,7 +14,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        default_schema: ${app.db.schema}
+        default_schema: ${app.postgres.schema}
     open-in-view: false
     hibernate:
       ddl-auto: none
@@ -25,8 +25,8 @@ spring:
     locations: classpath:db/migration
     sql-migration-prefix: V
     table: schema_version
-    schemas: ${app.db.schema}
-    init-sqls: CREATE SCHEMA IF NOT EXISTS ${app.db.schema};
+    schemas: ${app.postgres.schema}
+    init-sqls: CREATE SCHEMA IF NOT EXISTS ${app.postgres.schema};
     fail-on-missing-locations: true
     url: ${spring.datasource.url}
     user: ${spring.datasource.username}
@@ -41,6 +41,7 @@ spring:
     config:
       enabled: true
       fail-fast: true
+      label: master
     discovery:
       enabled: true
     stream:

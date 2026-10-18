@@ -3,7 +3,14 @@ app:
   config:
     username: ConfigUser
     password: ConfigPassword
-    key: MySuperSecretKey
-    salt: abcdef
+    key: "MySuperSecretKey"
+    salt: "deadbeef"
   eureka:
     url: http://uid:pwd@localhost:8761/eureka
+  postgres:
+    username: uid
+    password: pwd
+    database: demo
+    schema: config_server
+    host: localhost
+    port: 5432

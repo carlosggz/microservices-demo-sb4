@@ -1,0 +1,33 @@
+app:
+  config:
+    username: ConfigUser
+    password: ConfigPassword
+    key: "MySuperSecretKey"
+    salt: "deadbeef"
+  postgres:
+    username: sa
+    password: ""
+    database: config
+    schema: config_server
+    host: localhost
+    port: 5555
+  eureka:
+    url: http://xxx:yyy@localhost:7777/eureka
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;DATABASE_TO_UPPER=false;NON_KEYWORDS=KEY,VALUE;INIT=CREATE SCHEMA IF NOT EXISTS config_server;
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  config:
+    import: optional:configserver:http://localhost:1234
+  cloud:
+    discovery:
+      enabled: false
+
+eureka:
+  client:
+    enabled: false

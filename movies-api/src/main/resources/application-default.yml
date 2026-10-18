@@ -1,30 +1,3 @@
-app:
-  db:
-    username: uid
-    password: pwd
-    database: movies
-    schema: movies_api
-    host: localhost
-    port: 5432
-  rabbitmq:
-    username: uid
-    password: pwd
-    host: localhost
-    port: 5672
-    virtual-host: /
-  eureka:
-    url: http://uid:pwd@localhost:8761/eureka
-  port: 8084
-  swagger:
-    enabled: true
-
 spring:
   config:
-    import: optional:configserver:http://ConfigUser:ConfigPassword@localhost:8888
-  cloud:
-    config:
-      enabled: false
-
-eureka:
-  client:
-    enabled: false
+    import: configserver:http://ConfigUser:ConfigPassword@localhost:8888
