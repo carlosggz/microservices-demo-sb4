@@ -81,9 +81,9 @@ values ('api-gateway', 'default','master', 'app.auth.token-url', 'http://localho
 insert into properties(application, profile, label, "key", "value")
 values ('api-gateway', 'default','master', 'app.auth.issuer-url', 'http://localhost:9000/realms/demo-realm');
 insert into properties(application, profile, label, "key", "value")
-values ('api-gateway', 'default','master', 'app.auth.client-id', 'demo-client');
+values ('api-gateway', 'default','master', 'app.auth.client-id', '{cipher}9d97ea42847219863edf7e943ef08cc2cb3ef6b780ff561a5b7e066cf3958cc1');
 insert into properties(application, profile, label, "key", "value")
-values ('api-gateway', 'default','master', 'app.auth.client-secret', 'this-is-my-secret');
+values ('api-gateway', 'default','master', 'app.auth.client-secret', '{cipher}bdbd3e5dc63632483f7df3593bf56a9cd0ba5b8e04ebf6992e42895d2b2fb61f933efb725e11846ad3cd5e86a1d32962');
 insert into properties(application, profile, label, "key", "value")
 values ('api-gateway', 'default','master', 'app.auth.grant-type', 'password');
 insert into properties(application, profile, label, "key", "value")
