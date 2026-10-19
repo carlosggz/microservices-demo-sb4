@@ -1,0 +1,881 @@
+{
+  "info": {
+    "_postman_id": "079a1b2e-9749-4129-a8b6-c7aa648a30da",
+    "name": "Microservices demo SB4",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "296286"
+  },
+  "item": [
+    {
+      "name": "movies",
+      "item": [
+        {
+          "name": "Get movies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8084/api/v1/movies?text=jedi",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8084",
+              "path": [
+                "api",
+                "v1",
+                "movies"
+              ],
+              "query": [
+                {
+                  "key": "text",
+                  "value": "jedi"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get movie",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8084/api/v1/movies/SWVI",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8084",
+              "path": [
+                "api",
+                "v1",
+                "movies",
+                "SWVI"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add movie",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"id\",\n  \"title\": \"title\",\n  \"releaseYear\": 2000,\n  \"imdb\": \"imdb1\",\n  \"likes\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8084/api/v1/movies",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8084",
+              "path": [
+                "api",
+                "v1",
+                "movies"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update movie",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"id\",\n  \"title\": \"title modified\",\n  \"releaseYear\": 2000,\n  \"imdb\": \"imdb1\",\n  \"likes\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8084/api/v1/movies",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8084",
+              "path": [
+                "api",
+                "v1",
+                "movies"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete movie",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8084/api/v1/movies/id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8084",
+              "path": [
+                "api",
+                "v1",
+                "movies",
+                "id"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Like movie",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8084/api/v1/movies/like/SWI",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8084",
+              "path": [
+                "api",
+                "v1",
+                "movies",
+                "like",
+                "SWI"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "actors",
+      "item": [
+        {
+          "name": "Get actors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8085/api/v1/actors?text=mark",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "api",
+                "v1",
+                "actors"
+              ],
+              "query": [
+                {
+                  "key": "text",
+                  "value": "mark"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get actor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8085/api/v1/actors/ANAKIN",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "api",
+                "v1",
+                "actors",
+                "ANAKIN"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add actor",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"id\": \"test\",\n   \"firstName\": \"fn\",\n   \"lastName\": \"ln\",\n   \"character\": \"c\",\n   \"likes\": 0,\n   \"movies\": [\"xxx\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8085/api/v1/actors",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "api",
+                "v1",
+                "actors"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update actor",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"id\": \"test\",\n   \"firstName\": \"fn\",\n   \"lastName\": \"ln\",\n   \"character\": \"c\",\n   \"likes\": 0,\n   \"movies\": [\"xxx\", \"yyy\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8085/api/v1/actors",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "api",
+                "v1",
+                "actors"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete actor",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8085/api/v1/actors/test",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8085",
+              "path": [
+                "api",
+                "v1",
+                "actors",
+                "test"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "config-server",
+      "item": [
+        {
+          "name": "Get movie values - default",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "ConfigUser",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "ConfigPassword",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8888/movies-api/default/master",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "movies-api",
+                "default",
+                "master"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get gateway values - default",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "ConfigUser",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "ConfigPassword",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8888/api-gateway/default/master",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api-gateway",
+                "default",
+                "master"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get gateway values - docker",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "ConfigUser",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "ConfigPassword",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8888/api-gateway/docker/master",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api-gateway",
+                "docker",
+                "master"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get actors values - default",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "ConfigUser",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "ConfigPassword",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8888/actors-api/default/master",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "actors-api",
+                "default",
+                "master"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get actors values - docker",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "ConfigUser",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "ConfigPassword",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8888/actors-api/docker/master",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "actors-api",
+                "docker",
+                "master"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get movie values - docker",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "ConfigUser",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "ConfigPassword",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8888/movies-api/docker/master",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "movies-api",
+                "docker",
+                "master"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Encrypt value",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "ConfigUser",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "ConfigPassword",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "Hello world",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8888/encrypt",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "encrypt"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Decrypt value",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "ConfigUser",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "ConfigPassword",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "7ca9e4a359b0f85dd974a9d42ef96dba19e1e61f79998b5fd8839ffd893a6235",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8888/decrypt",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "decrypt"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "api-gateway",
+      "item": [
+        {
+          "name": "Ping",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/v1/gateway/ping",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "gateway",
+                "ping"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"demo-user\",\n    \"password\": \"demo-pass\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8083/api/v1/gateway/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "gateway",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "test keycloak",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "password"
+                },
+                {
+                  "key": "client_id",
+                  "value": "{{client-id}}"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "{{client-secret}}"
+                },
+                {
+                  "key": "username",
+                  "value": "{{username}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{password}}"
+                },
+                {
+                  "key": "scope",
+                  "value": "{{scope}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:9000/realms/demo-realm/protocol/openid-connect/token",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9000",
+              "path": [
+                "realms",
+                "demo-realm",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get movies",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "tokenName",
+                  "value": "token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "{{token-uri}}",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "{{client-id}}",
+                  "type": "string"
+                },
+                {
+                  "key": "clientSecret",
+                  "value": "{{client-secret}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{username}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{password}}",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "{{scope}}",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/v1/movies?text=jedi",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "movies"
+              ],
+              "query": [
+                {
+                  "key": "text",
+                  "value": "jedi"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get actors",
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "{{token-uri}}",
+                  "type": "string"
+                },
+                {
+                  "key": "clientId",
+                  "value": "{{client-id}}",
+                  "type": "string"
+                },
+                {
+                  "key": "clientSecret",
+                  "value": "{{client-secret}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{username}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{password}}",
+                  "type": "string"
+                },
+                {
+                  "key": "scope",
+                  "value": "{{scope}}",
+                  "type": "string"
+                },
+                {
+                  "key": "client_authentication",
+                  "value": "body",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/v1/actors?text=mark",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "actors"
+              ],
+              "query": [
+                {
+                  "key": "text",
+                  "value": "mark"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
