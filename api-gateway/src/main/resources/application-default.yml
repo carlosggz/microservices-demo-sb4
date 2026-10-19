@@ -1,0 +1,3 @@
+spring:
+  config:
+    import: configserver:http://ConfigUser:ConfigPassword@localhost:8888

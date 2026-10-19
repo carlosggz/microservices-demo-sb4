@@ -1,0 +1,22 @@
+spring:
+  config:
+    import: optional:configserver:http://ConfigUser:ConfigPassword@localhost:5555
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  client:
+    enabled: false
+
+app:
+  timeout-seconds: 5
+  auth:
+    client-id: "client-id"
+    client-secret: "client-secret"
+    token-url: http://localhost:${wiremock.server.port}/token
+    issuer-url: http://localhost:${wiremock.server.port}
+    grant-type: password
+    scope: profile
+  eureka:
+    url: http://uid:pwd@localhost:2222/eureka

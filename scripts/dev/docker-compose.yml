@@ -34,7 +34,22 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ../mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - my-network
+  auth:
+    image: quay.io/keycloak/keycloak:18.0
+    container_name: demo-auth
+    ports:
+      - "9000:8080"
+    environment:
+      KEYCLOAK_ADMIN: ${MY_USER}
+      KEYCLOAK_ADMIN_PASSWORD: ${MY_PASSWORD}
+    command:
+      - start-dev
+      - --import-realm
+    volumes:
+      - ../auth/realm.json:/opt/keycloak/data/import/realm.json
     networks:
       - my-network
 

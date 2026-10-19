@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      enabled: true
+      fail-fast: true
+      label: master
+    discovery:
+      enabled: true
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: movies_service
+              uri: lb://${app.movies-service}
+              predicates:
+                - Path=/api/v1/movies/**
+              filters:
+                - AddRequestHeader=X-Request-AppId, Api-Gateway
+                - RemoveRequestHeader=Cookie
+            - id: actors_service
+              uri: lb://${app.actors-service}
+              predicates:
+                - Path=/api/v1/actors/**
+              filters:
+                - AddRequestHeader=X-Request-AppId, Api-Gateway
+                - RemoveRequestHeader=Cookie
+          discovery:
+            locator:
+              enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${app.auth.issuer-url}
+
+eureka:
+  client:
+    enabled: true
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: ${app.eureka.url}
+
+server:
+  port: ${app.port:8080}
+
+app:
+  movies-service: movies-api
+  actors-service: actors-api

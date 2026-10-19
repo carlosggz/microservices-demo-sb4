@@ -71,3 +71,26 @@ values ('actors-api', 'default','master', 'app.swagger.enabled', 'true');
 insert into properties(application, profile, label, "key", "value")
 values ('actors-api', 'docker','master', 'app.swagger.enabled', 'false');
 
+-- Api gateway properties for default profile
+insert into properties(application, profile, label, "key", "value")
+values ('api-gateway', 'default','master', 'app.port', '8083');
+insert into properties(application, profile, label, "key", "value")
+values ('api-gateway', 'default','master', 'app.timeout-seconds', '5');
+insert into properties(application, profile, label, "key", "value")
+values ('api-gateway', 'default','master', 'app.auth.token-url', 'http://localhost:9000/realms/demo-realm/protocol/openid-connect/token');
+insert into properties(application, profile, label, "key", "value")
+values ('api-gateway', 'default','master', 'app.auth.issuer-url', 'http://localhost:9000/realms/demo-realm');
+insert into properties(application, profile, label, "key", "value")
+values ('api-gateway', 'default','master', 'app.auth.client-id', 'demo-client');
+insert into properties(application, profile, label, "key", "value")
+values ('api-gateway', 'default','master', 'app.auth.client-secret', 'this-is-my-secret');
+insert into properties(application, profile, label, "key", "value")
+values ('api-gateway', 'default','master', 'app.auth.grant-type', 'password');
+insert into properties(application, profile, label, "key", "value")
+values ('api-gateway', 'default','master', 'app.auth.scope', 'profile');
+
+-- Api gateway properties for docker profile
+insert into properties(application, profile, label, "key", "value")
+values ('api-gateway', 'docker','master', 'app.auth.token-url', 'http://auth:9000/realms/demo-realm/protocol/openid-connect/token');
+insert into properties(application, profile, label, "key", "value")
+values ('api-gateway', 'docker','master', 'app.auth.issuer-url', 'http://auth:9000/realms/demo-realm');
