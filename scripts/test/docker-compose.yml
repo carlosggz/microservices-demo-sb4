@@ -1,0 +1,185 @@
+services:
+  postgres:
+    image: postgres:13.7
+    container_name: demo-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${MY_USER}
+      POSTGRES_PASSWORD: ${MY_PASSWORD}
+      POSTGRES_DB: demo
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${MY_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+    networks:
+      - my-network
+  rabbitmq:
+    image: rabbitmq:3.8.5-management-alpine
+    container_name: demo-rabbitmq
+    restart: unless-stopped
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: ${MY_USER}
+      RABBITMQ_DEFAULT_PASS: ${MY_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmq-diagnostics -q status"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+    networks:
+      - my-network
+  mongo:
+    image: mongo:9.0
+    container_name: demo-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MY_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MY_PASSWORD}
+      MONGO_INITDB_DATABASE: demo
+    healthcheck:
+      test: ["CMD-SHELL", "mongo --eval 'db.adminCommand({ ping: 1 })'"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+    volumes:
+      - ../mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - my-network
+  auth:
+    image: quay.io/keycloak/keycloak:18.0
+    container_name: demo-auth
+    ports:
+      - "9000:8080"
+    environment:
+      KEYCLOAK_ADMIN: ${MY_USER}
+      KEYCLOAK_ADMIN_PASSWORD: ${MY_PASSWORD}
+    command:
+      - start-dev
+      - --import-realm
+    volumes:
+      - ../auth/realm.json:/opt/keycloak/data/import/realm.json
+    networks:
+      - my-network
+  eureka:
+    image: eureka-server:latest
+    container_name: demo-eureka
+    ports:
+      - "${EUREKA_PORT}:${EUREKA_PORT}"
+    environment:
+      APP_PORT: 8761
+      APP_EUREKA_URL: ${EUREKA_URL}
+      APP_EUREKA_USERNAME: ${MY_USER}
+      APP_EUREKA_PASSWORD: ${MY_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent --user \"$${APP_EUREKA_USERNAME}:$${APP_EUREKA_PASSWORD}\" http://localhost:$${APP_PORT}/actuator/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+    networks:
+      - my-network
+  config:
+    image: config-server:latest
+    container_name: demo-config
+    ports:
+      - "8888:8888"
+    environment:
+      APP_PORT: 8888
+      APP_CONFIG_USERNAME: ${CONFIG_USER}
+      APP_CONFIG_PASSWORD: ${CONFIG_PASSWORD}
+      APP_CONFIG.KEY: ${CONFIG_KEY}
+      APP_CONFIG.SALT: ${CONFIG_SALT}
+      APP_EUREKA_URL: ${EUREKA_URL}
+      APP_POSTGRES_USERNAME: ${MY_USER}
+      APP_POSTGRES_PASSWORD: ${MY_PASSWORD}
+      APP_POSTGRES_DATABASE: demo
+      APP_POSTGRES_SCHEMA: config_server
+      APP_POSTGRES_HOST: postgres
+      APP_POSTGRES_PORT: 5432
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent --user \"$${APP_CONFIG_USERNAME}:$${APP_CONFIG_PASSWORD}\" http://localhost:$${APP_PORT}/actuator/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+    networks:
+      - my-network
+  movies:
+    image: movies-api:latest
+    deploy:
+      replicas: 3
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_CONFIG_IMPORT: ${CONFIG_IMPORT}
+      APP_PORT: 8084
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+      config:
+        condition: service_healthy
+    networks:
+      - my-network
+  actors:
+    image: actors-api:latest
+    deploy:
+      replicas: 3
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_CONFIG_IMPORT: ${CONFIG_IMPORT}
+      APP_PORT: 8085
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+      config:
+        condition: service_healthy
+    networks:
+      - my-network
+  gateway:
+    image: api-gateway:latest
+    container_name: demo-gateway
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_CONFIG_IMPORT: ${CONFIG_IMPORT}
+      APP_PORT: 8083
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+      config:
+        condition: service_healthy
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

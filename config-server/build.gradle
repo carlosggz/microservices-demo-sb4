@@ -15,6 +15,7 @@ dependencies {
     implementation platform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
     implementation 'org.springframework.cloud:spring-cloud-config-server'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-flyway'

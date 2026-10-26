@@ -635,6 +635,17 @@
         },
         {
           "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "  const token = pm.response.json().access_token;\n  pm.collectionVariables.set('token-value', token);\n"
+                ]
+              }
+            }
+          ],
           "request": {
             "method": "POST",
             "header": [],
@@ -720,56 +731,11 @@
           "name": "Get movies",
           "request": {
             "auth": {
-              "type": "oauth2",
-              "oauth2": [
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "addTokenTo",
-                  "value": "header",
-                  "type": "string"
-                },
-                {
-                  "key": "tokenName",
-                  "value": "token",
-                  "type": "string"
-                },
-                {
-                  "key": "grant_type",
-                  "value": "password_credentials",
-                  "type": "string"
-                },
-                {
-                  "key": "accessTokenUrl",
-                  "value": "{{token-uri}}",
-                  "type": "string"
-                },
-                {
-                  "key": "clientId",
-                  "value": "{{client-id}}",
-                  "type": "string"
-                },
-                {
-                  "key": "clientSecret",
-                  "value": "{{client-secret}}",
-                  "type": "string"
-                },
-                {
-                  "key": "username",
-                  "value": "{{username}}",
-                  "type": "string"
-                },
-                {
-                  "key": "password",
-                  "value": "{{password}}",
-                  "type": "string"
-                },
-                {
-                  "key": "scope",
-                  "value": "{{scope}}",
-                  "type": "string"
-                },
-                {
-                  "key": "client_authentication",
-                  "value": "body",
+                  "key": "token",
+                  "value": "{{token-value}}",
                   "type": "string"
                 }
               ]
@@ -802,51 +768,11 @@
           "name": "Get actors",
           "request": {
             "auth": {
-              "type": "oauth2",
-              "oauth2": [
+              "type": "bearer",
+              "bearer": [
                 {
-                  "key": "addTokenTo",
-                  "value": "header",
-                  "type": "string"
-                },
-                {
-                  "key": "grant_type",
-                  "value": "password_credentials",
-                  "type": "string"
-                },
-                {
-                  "key": "accessTokenUrl",
-                  "value": "{{token-uri}}",
-                  "type": "string"
-                },
-                {
-                  "key": "clientId",
-                  "value": "{{client-id}}",
-                  "type": "string"
-                },
-                {
-                  "key": "clientSecret",
-                  "value": "{{client-secret}}",
-                  "type": "string"
-                },
-                {
-                  "key": "username",
-                  "value": "{{username}}",
-                  "type": "string"
-                },
-                {
-                  "key": "password",
-                  "value": "{{password}}",
-                  "type": "string"
-                },
-                {
-                  "key": "scope",
-                  "value": "{{scope}}",
-                  "type": "string"
-                },
-                {
-                  "key": "client_authentication",
-                  "value": "body",
+                  "key": "token",
+                  "value": "{{token-value}}",
                   "type": "string"
                 }
               ]
@@ -876,6 +802,12 @@
           "response": []
         }
       ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "token-value",
+      "value": ""
     }
   ]
 }

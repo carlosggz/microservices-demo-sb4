@@ -15,6 +15,7 @@ ext {
 dependencies {
     implementation platform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

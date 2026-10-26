@@ -46,7 +46,7 @@ values ('application', 'docker','master', 'app.postgres.host', 'postgres');
 insert into properties(application, profile, label, "key", "value")
 values ('application', 'docker','master', 'app.mongo.host', 'mongo');
 insert into properties(application, profile, label, "key", "value")
-values ('application', 'docker','master', 'app.eureka.url', '{cipher}07b9a1060cf4b826ec8cf1776eeae9043d7034aeb2ccf44f1f90a9929e949737f40830f08a3bf0ae530037e9aea130fc45b88f43c0143a4654588b45a203c64f');
+values ('application', 'docker','master', 'app.eureka.url', '{cipher}2386a3aab7b85552ed20d10a292d8785df98950da47b3007e457c71f55da3a0837583ba18922efd882dbdc2253a906600847a834abfd9aafd65092ac87c7ff9a');
 
 -- Movies api properties for default profile
 insert into properties(application, profile, label, "key", "value")
@@ -91,6 +91,6 @@ values ('api-gateway', 'default','master', 'app.auth.scope', 'profile');
 
 -- Api gateway properties for docker profile
 insert into properties(application, profile, label, "key", "value")
-values ('api-gateway', 'docker','master', 'app.auth.token-url', 'http://auth:9000/realms/demo-realm/protocol/openid-connect/token');
+values ('api-gateway', 'docker','master', 'app.auth.token-url', 'http://auth:8080/realms/demo-realm/protocol/openid-connect/token');
 insert into properties(application, profile, label, "key", "value")
-values ('api-gateway', 'docker','master', 'app.auth.issuer-url', 'http://auth:9000/realms/demo-realm');
+values ('api-gateway', 'docker','master', 'app.auth.issuer-url', 'http://auth:8080/realms/demo-realm');
