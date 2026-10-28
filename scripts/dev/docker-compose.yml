@@ -52,6 +52,13 @@ services:
       - ../auth/realm.json:/opt/keycloak/data/import/realm.json
     networks:
       - my-network
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: demo_zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - my-network
 
 networks:
   my-network:

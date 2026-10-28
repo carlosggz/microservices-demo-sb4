@@ -325,7 +325,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8888/movies-api/default/master",
+              "raw": "http://localhost:8888/movies-api/docker/master",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -333,7 +333,7 @@
               "port": "8888",
               "path": [
                 "movies-api",
-                "default",
+                "docker",
                 "master"
               ]
             }
@@ -759,6 +759,39 @@
                   "key": "text",
                   "value": "jedi"
                 }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Like movie",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token-value}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8083/api/v1/movies/like/SWIV",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "movies",
+                "like",
+                "SWIV"
               ]
             }
           },

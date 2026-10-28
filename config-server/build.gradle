@@ -12,13 +12,16 @@ ext {
 }
 
 dependencies {
-    implementation platform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
-    implementation 'org.springframework.cloud:spring-cloud-config-server'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    //Spring boot
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-flyway'
+
+    //Spring Cloud
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
+    implementation 'org.springframework.cloud:spring-cloud-config-server'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
     //database
     runtimeOnly 'org.postgresql:postgresql'

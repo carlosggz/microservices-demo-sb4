@@ -20,6 +20,9 @@ app:
     url: http://xxx:yyy@localhost:7777/eureka
   swagger:
     enabled: false
+  tracing:
+    probability: 1
+    endpoint: http://localhost:123
 
 spring:
   datasource:
@@ -42,3 +45,5 @@ spring:
 eureka:
   client:
     enabled: false
+
+management.tracing.export.zipkin.enabled: false

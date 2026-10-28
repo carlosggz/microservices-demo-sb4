@@ -5,10 +5,16 @@ An example microservices application that demonstrates the following best practi
 - Externalized configuration (Spring Cloud Config Server)
 - Event-driven communication (Spring Cloud Stream)
 - API Gateway for security and service access control (Spring Cloud Gateway)
+- Identity server using [Keycloak](https://www.keycloak.org/)
+- Traceability using micrometer and [Zipkin](https://zipkin.io/)
 
 ## Execution result
 
-Running the complete stack deploys Eureka, the Config Server, and the API Gateway, along with three instances each of the Movies API and Actors API. PostgreSQL, MongoDB, RabbitMQ, and Keycloak are also started as supporting services. All external requests go through the API Gateway, which validates the JWT token and uses Eureka to route each request to an available instance of the requested service.
+Running the complete stack deploys Eureka, the Config Server, and the API Gateway, along with three 
+instances each of the Movies API and Actors API. PostgreSQL, MongoDB, RabbitMQ, and Keycloak are 
+also started as supporting services. All external requests go through the API Gateway, which 
+validates the JWT token and uses Eureka to route each request to an available instance of the 
+requested service.
 
 ```text
                          +-----------------+
@@ -36,6 +42,11 @@ Client requests ---> +-----------------+       +-----------------+
        +-----------------+       +-----------------+
        |  Config Server  |       |    RabbitMQ     |
        +-----------------+       +-----------------+
+
+                         +-----------------+
+                         |     Zipkin      |
+                         |  Traceability   |
+                         +-----------------+
 ```
 
 ## Instructions
@@ -47,6 +58,7 @@ First, start the external services defined in the Docker Compose file in the `sc
 - MongoDB (used by the Actors API)
 - RabbitMQ (for messaging)
 - Keycloak (used by the API Gateway for authorization)
+- Zipkin (for traceability)
 
 To run the examples locally, you can disable Eureka and Config Server access in the default profile of the desired project. To run the complete stack, start the services in the following order:
 - Eureka
@@ -67,7 +79,9 @@ The stack includes:
 - Actors API with three instances
 - API Gateway
 
-Services are accessed through the API Gateway using a JWT token. The gateway uses Eureka to locate an available instance of the requested service and forwards the request to it. See the included Postman collection and the `api-gateway` directory for more details.
+Services are accessed through the API Gateway using a JWT token. The gateway uses Eureka to locate 
+an available instance of the requested service and forwards the request to it. See the included 
+Postman collection and the `api-gateway` directory for more details.
 
 To stop the stack, run the following script from the same directory:
 

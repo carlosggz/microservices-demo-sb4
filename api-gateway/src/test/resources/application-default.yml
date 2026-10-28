@@ -20,3 +20,8 @@ app:
     scope: profile
   eureka:
     url: http://uid:pwd@localhost:2222/eureka
+  tracing:
+    probability: 1
+    endpoint: http://localhost:123
+
+management.tracing.export.zipkin.enabled: false

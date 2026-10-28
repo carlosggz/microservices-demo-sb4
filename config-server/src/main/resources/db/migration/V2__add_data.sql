@@ -37,6 +37,10 @@ insert into properties(application, profile, label, "key", "value")
 values ('application', 'default','master', 'app.mongo.transaction-enabled', 'false');
 insert into properties(application, profile, label, "key", "value")
 values ('application', 'default','master', 'app.mongo.uri-suffix', '?retryWrites=false&authSource=admin');
+insert into properties(application, profile, label, "key", "value")
+values ('application', 'default','master', 'app.tracing.probability', '1');
+insert into properties(application, profile, label, "key", "value")
+values ('application', 'default','master', 'app.tracing.endpoint', 'http://localhost:9411/api/v2/spans');
 
 -- Common properties for docker profile
 insert into properties(application, profile, label, "key", "value")
@@ -47,6 +51,8 @@ insert into properties(application, profile, label, "key", "value")
 values ('application', 'docker','master', 'app.mongo.host', 'mongo');
 insert into properties(application, profile, label, "key", "value")
 values ('application', 'docker','master', 'app.eureka.url', '{cipher}2386a3aab7b85552ed20d10a292d8785df98950da47b3007e457c71f55da3a0837583ba18922efd882dbdc2253a906600847a834abfd9aafd65092ac87c7ff9a');
+insert into properties(application, profile, label, "key", "value")
+values ('application', 'docker','master', 'app.tracing.endpoint', 'http://zipkin:9411/api/v2/spans');
 
 -- Movies api properties for default profile
 insert into properties(application, profile, label, "key", "value")

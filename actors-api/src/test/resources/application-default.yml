@@ -10,6 +10,9 @@ app:
     virtual-host: /
   swagger:
     enabled: false
+  tracing:
+    probability: 1
+    endpoint: http://localhost:123
 
 spring:
   config:
@@ -26,3 +29,5 @@ de.flapdoodle.mongodb.embedded.version: 7.0.2
 
 mongock:
   enabled: false
+
+management.tracing.export.zipkin.enabled: false

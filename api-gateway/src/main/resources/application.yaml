@@ -46,6 +46,27 @@ eureka:
 server:
   port: ${app.port:8080}
 
+#Management
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+    env:
+      access: read_only
+  endpoints:
+    web:
+      exposure:
+        include: env, health, info
+  tracing:
+    sampling:
+      probability: ${app.tracing.probability}
+    export:
+      zipkin:
+        enabled: true
+        endpoint: ${app.tracing.endpoint}
+
 app:
   movies-service: movies-api
   actors-service: actors-api
